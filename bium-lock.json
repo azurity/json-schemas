@@ -1,0 +1,46 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "title": ".bium.lock",
+    "type":"object",
+    "additionalProperties": false,
+    "required": ["packs"],
+    "properties": {
+        "packs": {
+            "type": "object",
+            "additionalItems": false,
+            "patternProperties": {
+                "^.+$": {
+                    "type": "object",
+                    "required": ["repo", "version", "from"],
+                    "properties": {
+                        "repo": {
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "version": {
+                            "type": "string",
+                            "pattern": "\\d+\\.\\d+\\.\\d+(-[0-9a-zA-Z-.]+)?(\\+[0-9a-zA-Z-.]+)?"
+                        },
+                        "from": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": ["name", "version"],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "pattern": "^.+$"
+                                    },
+                                    "version": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
